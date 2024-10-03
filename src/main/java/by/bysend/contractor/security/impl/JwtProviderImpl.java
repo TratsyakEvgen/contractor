@@ -1,5 +1,6 @@
-package by.bysend.contractor.security;
+package by.bysend.contractor.security.impl;
 
+import by.bysend.contractor.security.JwtProvider;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import org.springframework.stereotype.Component;
@@ -9,48 +10,40 @@ import java.util.Date;
 
 @Component
 public class JwtProviderImpl implements JwtProvider {
-    private final SecretKey jwtAccessSecret;
-    private final SecretKey jwtRefreshSecret;
-
-    public JwtProviderImpl() {
-        this.jwtAccessSecret = Jwts.SIG.HS256.key().build();
-        this.jwtRefreshSecret = Jwts.SIG.HS256.key().build();
-    }
+    private final SecretKey jwtAccessSecret = Jwts.SIG.HS256.key().build();
+    private final SecretKey jwtRefreshSecret = Jwts.SIG.HS256.key().build();
 
     @Override
-    public String generateAccessToken(long id) {
+    public String generateAccessToken(long id, String role) {
         return Jwts.builder()
-                .expiration(new Date(System.currentTimeMillis() + 5 * 60 * 1000))
+                .expiration(new Date(System.currentTimeMillis() + 15 * 60 * 1000))
                 .signWith(jwtAccessSecret)
                 .claim("id", id)
+                .claim("role", role)
                 .compact();
     }
 
     @Override
-    public String generateRefreshToken(long id) {
+    public String generateRefreshToken(long id, String role) {
         return Jwts.builder()
-                .expiration(new Date(System.currentTimeMillis() + 30L * 24 * 60 * 60 * 1000))
+                .expiration(new Date(System.currentTimeMillis() + 7 * 24 * 60 * 60 * 1000))
                 .signWith(jwtRefreshSecret)
                 .claim("id", id)
+                .claim("role", role)
                 .compact();
     }
 
     @Override
-    public Claims getAccessClaims(String token) throws JwtProviderException {
+    public Claims getAccessClaims(String token) {
         return getClaims(token, jwtAccessSecret);
     }
 
     @Override
-    public Claims getRefreshClaims(String token) throws JwtProviderException {
+    public Claims getRefreshClaims(String token) {
         return getClaims(token, jwtRefreshSecret);
     }
 
-    private Claims getClaims(String token, SecretKey secret) throws JwtProviderException {
-        try {
-            return Jwts.parser().verifyWith(secret).build().parseSignedClaims(token).getPayload();
-        } catch (Exception e) {
-            throw new JwtProviderException("Token is not valid", e);
-        }
+    private Claims getClaims(String token, SecretKey secret) {
+        return Jwts.parser().verifyWith(secret).build().parseSignedClaims(token).getPayload();
     }
-
 }

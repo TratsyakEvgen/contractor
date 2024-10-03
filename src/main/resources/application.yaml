@@ -1,1 +1,14 @@
-spring.application.name=contractor
+spring:
+   application:
+     name: contractor
+   jpa:
+     show-sql: true
+     hibernate:
+       ddl-auto: update
+   datasource:
+     url: jdbc:postgresql://localhost:5432/contractors
+     username: postgres
+     password: Traktaryst
+     driver-class-name: org.postgresql.Driver
+server:
+  port: 8082

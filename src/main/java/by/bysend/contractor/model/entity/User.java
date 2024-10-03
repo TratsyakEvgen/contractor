@@ -1,25 +1,28 @@
 package by.bysend.contractor.model.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
-    private String registrationAddress;
-    private String realAddress;
-    private String passportNumber;
-    private String passportId;
-    private String insuranceId;
-    private String phoneNumber;
-    private String Email;
-    @OneToMany(mappedBy = "userDetails")
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private UserInfo userInfo;
+    @OneToMany(mappedBy = "user")
+    private List<Client> clients;
+    @OneToMany(mappedBy = "user")
     private List<Account> accounts;
-    @OneToOne
-    @MapsId
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private AuthData authData;
 }

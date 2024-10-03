@@ -1,22 +1,21 @@
 package by.bysend.contractor.security;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
+import java.util.List;
 
+@RequiredArgsConstructor
 public class JwtAuthentication implements Authentication {
-    private boolean authenticated;
     private final long id;
-
-    public JwtAuthentication(boolean authenticated, long id) {
-        this.authenticated = authenticated;
-        this.id = id;
-    }
+    private final String role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return List.of(new SimpleGrantedAuthority("ROLE_" + role));
     }
 
     @Override
@@ -36,12 +35,11 @@ public class JwtAuthentication implements Authentication {
 
     @Override
     public boolean isAuthenticated() {
-        return authenticated;
+        return true;
     }
 
     @Override
     public void setAuthenticated(boolean isAuthenticated) throws IllegalArgumentException {
-        this.authenticated = isAuthenticated;
     }
 
     @Override
