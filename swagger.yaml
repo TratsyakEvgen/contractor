@@ -39,9 +39,9 @@ paths:
         - name: "name"
           in: query
           required: false
+          description: Часть названия компании (без учета регистра)
           schema:
             type: string
-            description: Часть названия компании (без учета регистра)
             example: ооо ромаш
         - name: "clientStatusId"
           in: query
