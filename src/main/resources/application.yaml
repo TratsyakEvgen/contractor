@@ -4,11 +4,21 @@ spring:
    jpa:
      show-sql: true
      hibernate:
-       ddl-auto: update
+       ddl-auto: validate
+     open-in-view: false
    datasource:
      url: jdbc:postgresql://localhost:5432/contractors
      username: postgres
      password: Traktaryst
      driver-class-name: org.postgresql.Driver
+   flyway:
+     locations: classpath:db.migration
 server:
   port: 8082
+logging:
+  level:
+    org:
+      springframework:
+        transaction: debug
+        orm:
+          jpa: debug

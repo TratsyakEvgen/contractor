@@ -1,4 +1,4 @@
-package by.bysend.contractor.model.dto;
+package by.bysend.contractor.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

@@ -15,8 +15,9 @@ public class AuthData {
     private Long id;
     private String login;
     private String password;
-    @OneToOne
-    @MapsId("id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @MapsId
+    // @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
     @ManyToOne
     private Role role;

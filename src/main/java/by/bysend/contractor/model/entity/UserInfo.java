@@ -9,9 +9,9 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @ToString
 public class UserInfo {
     @Id
@@ -23,8 +23,8 @@ public class UserInfo {
     private String passportId;
     private String insuranceId;
     private String phoneNumber;
-    private String Email;
+    private String email;
     @OneToOne
-    @MapsId("id")
+    @MapsId
     private User user;
 }

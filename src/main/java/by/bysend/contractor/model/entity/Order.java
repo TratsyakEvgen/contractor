@@ -5,19 +5,17 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private long orderId;
     @ManyToOne
     private Client client;
     @ManyToOne
@@ -44,9 +42,19 @@ public class Order {
     private String info;
     private String clientFullName;
     private String clientNumberPhone;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Reward reward;
 
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Order order = (Order) object;
+        return orderId == order.orderId;
+    }
 
-
-
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(orderId);
+    }
 }

@@ -2,27 +2,29 @@ package by.bysend.contractor.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@Accessors(chain = true)
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private long userId;
     private String fullName;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserInfo userInfo;
     @OneToMany(mappedBy = "user")
-    private List<Client> clients;
+    private Set<Client> clients;
     @OneToMany(mappedBy = "user")
-    private List<Account> accounts;
+    private Set<Account> accounts;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private AuthData authData;
+
 }

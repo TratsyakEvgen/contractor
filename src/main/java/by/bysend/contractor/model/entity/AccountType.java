@@ -10,17 +10,11 @@ import java.util.List;
 @Table(name = "account_types")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class AccountType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private Long accountId;
     @Enumerated(EnumType.STRING)
     private AccountTypeName typeName;
-    @OneToMany(mappedBy = "accountType")
-    private List<Account> accounts;
-
 }

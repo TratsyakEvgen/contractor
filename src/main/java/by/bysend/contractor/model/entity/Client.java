@@ -2,33 +2,44 @@ package by.bysend.contractor.model.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.aspectj.weaver.ast.Or;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "clients")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private long clientId;
     private String name;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToMany(mappedBy = "client")
-    private List<Order> orders;
-    @ManyToOne
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    private Set<Order> orders;
+    @ManyToOne(fetch = FetchType.LAZY)
     private ClientStatus clientStatus;
-    @OneToMany(mappedBy = "client")
-    private List<Meeting> meetings;
-    @OneToMany(mappedBy = "client")
-    private List<Call> calls;
-    @OneToMany(mappedBy = "client")
-    private List<ClientContact> contacts;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    private Set<Meeting> meetings;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    private Set<Call> calls;
+    @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
+    private Set<ClientContact> contacts;
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Client client = (Client) object;
+        return clientId == client.clientId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(clientId);
+    }
 }

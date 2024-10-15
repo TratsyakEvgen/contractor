@@ -1,4 +1,4 @@
-package by.bysend.contractor.model.dto;
+package by.bysend.contractor.dto;
 
 import jakarta.validation.constraints.*;
 import lombok.Getter;
@@ -11,7 +11,7 @@ import lombok.ToString;
 public class TelegramRegistrationDTO {
     @Pattern(regexp = "^[А-ЯЁ][a-яА-ЯЁё-]+\\s[А-ЯЁ][a-яА-ЯЁё-]+\\s[А-ЯЁ][a-яА-ЯЁё-]+$", message = "Неверный формат ФИО")
     private String fullName;
-    @NotNull(message = "Неверный ID Telegram" )
+    @NotNull(message = "Неверный ID Telegram")
     @Min(value = 1, message = "Неверный ID Telegram")
     private Long telegramId;
     @NotBlank(message = "Адрес регистрации не должен быть пустым")

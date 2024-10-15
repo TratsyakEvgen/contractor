@@ -1,7 +1,7 @@
 package by.bysend.contractor.service.impl;
 
-import by.bysend.contractor.model.dto.AuthDTO;
-import by.bysend.contractor.model.dto.TokenDTO;
+import by.bysend.contractor.dto.AuthDTO;
+import by.bysend.contractor.dto.TokenDTO;
 import by.bysend.contractor.model.entity.AuthData;
 import by.bysend.contractor.model.entity.name.RoleName;
 import by.bysend.contractor.repository.AuthDataRepository;
@@ -26,9 +26,7 @@ public class TokenServiceImpl implements TokenService {
         String login = authDTO.getLogin();
 
         AuthData authData = authDataRepository.findByLogin(login)
-                .orElseThrow(
-                        () -> new ServiceException(String.format("Login %s not found", login), ErrorCode.USER_NO_EXISTS)
-                );
+                .orElseThrow(() -> new ServiceException("Login " + login + " not found", ErrorCode.USER_NO_EXISTS));
 
         if (!passwordEncoder.matches(authDTO.getPassword(), authData.getPassword())) {
             throw new ServiceException("Incorrect password", ErrorCode.INCORRECT_PASSWORD);

@@ -1,7 +1,7 @@
 package by.bysend.contractor.service;
 
-import by.bysend.contractor.model.dto.TelegramRegistrationDTO;
+import by.bysend.contractor.model.entity.User;
 
 public interface UserService {
-    void registration(TelegramRegistrationDTO telegramRegistrationDTO);
+    void create(User user);
 }

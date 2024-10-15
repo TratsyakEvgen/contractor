@@ -1,10 +1,12 @@
 package by.bysend.contractor.controller;
 
 
-import by.bysend.contractor.model.dto.ErrorDTO;
+import by.bysend.contractor.dto.ErrorDTO;
 import by.bysend.contractor.service.exception.ErrorCode;
 import by.bysend.contractor.service.exception.ServiceException;
 import io.jsonwebtoken.security.SignatureException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,17 +46,15 @@ public class ExceptionController {
         ));
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorDTO> processMethodArgumentNotValidException(MethodArgumentNotValidException e) {
+    @ExceptionHandler(ConstraintViolationException.class)
+
+    public ResponseEntity<ErrorDTO> processConstraintViolationException(ConstraintViolationException e) {
         log.info(e.getMessage());
-        String messages = e.getBindingResult().getFieldErrors().stream()
-                .map(FieldError::getDefaultMessage)
+        String messages = e.getConstraintViolations().stream()
+                .map(ConstraintViolation::getMessage)
                 .collect(Collectors.joining("; "));
 
-        return new ResponseEntity<>(
-                new ErrorDTO(HttpStatus.UNPROCESSABLE_ENTITY.value(), messages),
-                HttpStatus.UNPROCESSABLE_ENTITY
-        );
+        return new ResponseEntity<>(new ErrorDTO(HttpStatus.UNPROCESSABLE_ENTITY.value(), messages), HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @ExceptionHandler(ServiceException.class)

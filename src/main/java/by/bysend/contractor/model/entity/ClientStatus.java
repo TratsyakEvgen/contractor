@@ -10,16 +10,11 @@ import java.util.List;
 @Table(name = "client_status")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class ClientStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private long clientStatusId;
     @Enumerated(EnumType.STRING)
     private ClientStatusName status;
-    @OneToMany(mappedBy = "clientStatus")
-    private List<Client> clients;
 }

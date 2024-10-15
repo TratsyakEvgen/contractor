@@ -1,4 +1,4 @@
-package by.bysend.contractor.model.dto;
+package by.bysend.contractor.dto;
 
 import lombok.Builder;
 import lombok.Getter;

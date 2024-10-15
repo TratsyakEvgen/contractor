@@ -1,7 +1,6 @@
 package by.bysend.contractor.security;
 
 
-import by.bysend.contractor.model.entity.name.RoleName;
 import io.jsonwebtoken.Claims;
 
 public interface JwtProvider {

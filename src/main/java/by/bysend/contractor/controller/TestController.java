@@ -5,8 +5,6 @@ import by.bysend.contractor.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,8 +17,8 @@ public class TestController {
     private final UserRepository userRepository;
 
     @GetMapping
-    private Page<User> user(){
-        Page<User> all = userRepository.findAll(PageRequest.of(0, 1));
+    private Page<User> user() {
+        Page<User> all = userRepository.findAll(PageRequest.of(1, 1));
         System.out.println(all.getContent());
         return all;
     }

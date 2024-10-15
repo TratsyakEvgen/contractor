@@ -4,22 +4,32 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "calls")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class Call {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "id")
+    private long callId;
     private LocalDate localDate;
     private String result;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
+
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) return true;
+        if (object == null || getClass() != object.getClass()) return false;
+        Call call = (Call) object;
+        return callId == call.callId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(callId);
+    }
 }

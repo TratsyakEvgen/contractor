@@ -21,6 +21,4 @@ public class Role {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private RoleName roleName;
-    @OneToMany(mappedBy = "role")
-    private List<AuthData> authData;
 }
