@@ -2,9 +2,8 @@ package by.bysend.contractor.model.entity;
 
 import by.bysend.contractor.model.entity.name.ClientStatusName;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "client_status")

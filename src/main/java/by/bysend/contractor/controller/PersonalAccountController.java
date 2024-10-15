@@ -13,7 +13,7 @@ public class PersonalAccountController {
     private final PersonalAccountService personalAccountService;
 
     @GetMapping("users/{id}/personalAccount")
-    public PersonalAccountDTO getPersonalAccount(@PathVariable long id){
+    public PersonalAccountDTO getPersonalAccount(@PathVariable long id) {
         return personalAccountService.getPersonalAccount(id);
     }
 }

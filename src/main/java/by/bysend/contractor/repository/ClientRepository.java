@@ -20,6 +20,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @EntityGraph(attributePaths = {"meetings", "contacts", "clientStatus", "calls"})
     List<Client> findAllByClientIdIn(List<Long> idList);
+
     @EntityGraph(attributePaths = {"meetings", "orders"})
     List<Client> findAllByUser(User user);
 }
