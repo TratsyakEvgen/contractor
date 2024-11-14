@@ -4,6 +4,7 @@ import by.bysend.contractor.dto.TelegramRegistrationDTO;
 import by.bysend.contractor.mapper.UserMapper;
 import by.bysend.contractor.model.entity.User;
 import by.bysend.contractor.service.UserService;
+import io.swagger.v3.oas.annotations.Hidden;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
+@Hidden
 public class UserController {
     private final UserService userService;
     private final UserMapper userMapper;

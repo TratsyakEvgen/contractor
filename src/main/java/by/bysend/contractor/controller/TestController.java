@@ -2,6 +2,7 @@ package by.bysend.contractor.controller;
 
 import by.bysend.contractor.model.entity.User;
 import by.bysend.contractor.repository.UserRepository;
+import io.swagger.v3.oas.annotations.Hidden;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,6 +14,7 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/test")
+@Hidden
 public class TestController {
     private final UserRepository userRepository;
 
