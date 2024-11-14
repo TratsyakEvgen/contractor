@@ -1,5 +1,5 @@
-INSERT INTO users(id, full_name)
-VALUES (1, 'Иванов Иван Иванович');
+INSERT INTO users(full_name)
+VALUES ('Иванов Иван Иванович');
 
 INSERT INTO auth_data(user_id, login, password, role_id)
 VALUES (1, '123456789', '$2a$10$MCFA9EeSP5tfY33QXR69x.if9jiTRoqvu2SqXaf9zTaXZMIRGtwc6', 2);

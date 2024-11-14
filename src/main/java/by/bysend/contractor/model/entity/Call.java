@@ -14,8 +14,7 @@ import java.util.Objects;
 public class Call {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long callId;
+    private long id;
     private LocalDate localDate;
     private String result;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -26,11 +25,11 @@ public class Call {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Call call = (Call) object;
-        return callId == call.callId;
+        return id == call.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(callId);
+        return Objects.hash(id);
     }
 }

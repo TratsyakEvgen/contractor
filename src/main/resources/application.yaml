@@ -1,18 +1,18 @@
 spring:
-   application:
-     name: contractor
-   jpa:
-     show-sql: true
-     hibernate:
-       ddl-auto: validate
-     open-in-view: false
-   datasource:
-     url: jdbc:postgresql://localhost:5432/contractors
-     username: postgres
-     password: Traktaryst
-     driver-class-name: org.postgresql.Driver
-   flyway:
-     locations: classpath:db.migration
+  application:
+    name: contractor
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/contractors
+    username: postgres
+    password: Traktaryst
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    locations: classpath:db.migration
 server:
   port: 8082
 logging:

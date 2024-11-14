@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -14,8 +13,7 @@ import java.util.Set;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long clientId;
+    private long id;
     private String name;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
@@ -30,16 +28,4 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<ClientContact> contacts;
 
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Client client = (Client) object;
-        return clientId == client.clientId;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(clientId);
-    }
 }

@@ -1,70 +1,70 @@
 CREATE TABLE account_types
 (
-    id        BIGSERIAL,
-    type_name VARCHAR(255),
+    id   BIGSERIAL,
+    type TEXT NOT NULL,
     CONSTRAINT pk_account_types PRIMARY KEY (id)
 );
 
 CREATE TABLE accounts
 (
     id              BIGSERIAL,
-    login           VARCHAR(255),
-    password        VARCHAR(255),
-    account_type_id BIGINT,
-    user_id         BIGINT,
+    login           TEXT   NOT NULL,
+    password        TEXT   NOT NULL,
+    account_type_id BIGINT NOT NULL,
+    user_id         BIGINT NOT NULL,
     CONSTRAINT pk_accounts PRIMARY KEY (id)
 );
 
 CREATE TABLE auth_data
 (
     user_id  BIGINT NOT NULL,
-    login    VARCHAR(255),
-    password VARCHAR(255),
-    role_id  BIGINT,
-    CONSTRAINT pk_authdata PRIMARY KEY (user_id)
+    login    TEXT   NOT NULL,
+    password TEXT   NOT NULL,
+    role_id  BIGINT NOT NULL,
+    CONSTRAINT pk_auth_data PRIMARY KEY (user_id)
 );
 
 CREATE TABLE calls
 (
     id         BIGSERIAL,
-    local_date date,
-    result     VARCHAR(255),
-    client_id  BIGINT,
+    local_date DATE   NOT NULL,
+    result     TEXT   NOT NULL,
+    client_id  BIGINT NOT NULL,
     CONSTRAINT pk_calls PRIMARY KEY (id)
 );
 
 CREATE TABLE client_contacts
 (
     id           BIGSERIAL,
-    phone_number VARCHAR(255),
-    description  VARCHAR(255),
-    client_id    BIGINT,
+    phone_number TEXT   NOT NULL,
+    description  TEXT   NOT NULL,
+    client_id    BIGINT NOT NULL,
     CONSTRAINT pk_client_contacts PRIMARY KEY (id)
 );
 
 CREATE TABLE client_status
 (
     id     BIGSERIAL,
-    status VARCHAR(255),
+    status TEXT NOT NULL,
     CONSTRAINT pk_client_status PRIMARY KEY (id)
 );
 
 CREATE TABLE clients
 (
     id               BIGSERIAL,
-    name             VARCHAR(255),
-    user_id          BIGINT,
-    client_status_id BIGINT,
+    name             TEXT   NOT NULL,
+    user_id          BIGINT NOT NULL,
+    client_status_id BIGINT NOT NULL,
     CONSTRAINT pk_clients PRIMARY KEY (id)
 );
 
 CREATE TABLE meetings
 (
     id         BIGSERIAL,
-    local_date date,
-    result     VARCHAR(255),
-    report_id  BIGINT,
-    client_id  BIGINT,
+    local_date DATE   NOT NULL,
+    result     TEXT   NOT NULL,
+    report_id  BIGINT NOT NULL,
+    client_id  BIGINT NOT NULL,
     CONSTRAINT pk_meetings PRIMARY KEY (id)
 );
 

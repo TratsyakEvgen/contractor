@@ -1,7 +1,8 @@
 package by.bysend.contractor.model.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -10,19 +11,15 @@ import java.util.Objects;
 @Table(name = "meetings")
 @Getter
 @Setter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 public class Meeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDate localDate;
     private String result;
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Report report;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
 
     @Override

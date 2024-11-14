@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Objects;
-
 @Entity
 @Table(name = "accounts")
 @Getter
@@ -13,25 +11,11 @@ import java.util.Objects;
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long accountId;
+    private long id;
     private String login;
     private String password;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private AccountType accountType;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-        Account account = (Account) object;
-        return Objects.equals(accountId, account.accountId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(accountId);
-    }
 }

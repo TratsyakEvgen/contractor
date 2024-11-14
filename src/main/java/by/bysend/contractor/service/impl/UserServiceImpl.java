@@ -1,15 +1,14 @@
 package by.bysend.contractor.service.impl;
 
+import by.bysend.contractor.exception.ErrorCode;
+import by.bysend.contractor.exception.ServiceException;
 import by.bysend.contractor.model.entity.Role;
 import by.bysend.contractor.model.entity.User;
-import by.bysend.contractor.model.entity.name.RoleName;
 import by.bysend.contractor.repository.AuthDataRepository;
 import by.bysend.contractor.repository.RoleRepository;
 import by.bysend.contractor.repository.UserInfoRepository;
 import by.bysend.contractor.repository.UserRepository;
 import by.bysend.contractor.service.UserService;
-import by.bysend.contractor.service.exception.ErrorCode;
-import by.bysend.contractor.service.exception.ServiceException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -31,11 +30,8 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void create(User user) {
         Long telegramId = user.getUserInfo().getTelegramId();
-        Role role = roleRepository.findByRoleName(RoleName.USER)
-                .orElseThrow(() -> new ServiceException(
-                        String.format("Role %s not found", RoleName.USER),
-                        ErrorCode.SERVICE_ERROR
-                ));
+        Role role = roleRepository.findByRole("USER")
+                .orElseThrow(() -> new ServiceException("Role USER not found", ErrorCode.INTERNAL_SERVER_ERROR));
         lock.lock();
         try {
             throwIfUserExists(telegramId);

@@ -1,4 +1,4 @@
-package by.bysend.contractor.service.exception;
+package by.bysend.contractor.exception;
 
 import lombok.Getter;
 

@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 public class Reward {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
     private BigDecimal amount;
 }

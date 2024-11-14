@@ -13,8 +13,7 @@ import java.util.Objects;
 public class ClientContact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long clientContactId;
+    private long id;
     private String phoneNumber;
     private String description;
     @ManyToOne(fetch = FetchType.LAZY)
@@ -25,11 +24,11 @@ public class ClientContact {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         ClientContact that = (ClientContact) object;
-        return clientContactId == that.clientContactId;
+        return id == that.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(clientContactId);
+        return Objects.hash(id);
     }
 }

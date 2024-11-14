@@ -16,10 +16,10 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long orderId;
-    @ManyToOne
+    private long id;
+    @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private TransportationType transportationType;
     private String transportType;
     private String loadingPlace;
@@ -51,11 +51,11 @@ public class Order {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Order order = (Order) object;
-        return orderId == order.orderId;
+        return id == order.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId);
+        return Objects.hash(id);
     }
 }

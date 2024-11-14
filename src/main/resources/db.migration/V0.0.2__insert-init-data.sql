@@ -1,4 +1,4 @@
-INSERT INTO account_types(type_name)
+INSERT INTO account_types(type)
 VALUES ('SIP'),
        ('ZOOM');
 
