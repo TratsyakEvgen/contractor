@@ -35,6 +35,6 @@ public class DefaultClientService implements ClientService {
                 .collect(Collectors.toMap(Client::getId, Function.identity()));
         return clientPage.map(Client::getId)
                 .map(clientMap::get)
-                .map(clientMapper::getResponseClient);
+                .map(clientMapper::toResponseClient);
     }
 }

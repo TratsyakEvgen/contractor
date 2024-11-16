@@ -24,12 +24,12 @@ CREATE TABLE calls
     CONSTRAINT pk_calls PRIMARY KEY (id)
 );
 
-CREATE TABLE client_contacts
+CREATE TABLE contacts
 (
     id           BIGSERIAL,
-    phone_number TEXT   NOT NULL,
-    description  TEXT   NOT NULL,
-    client_id    BIGINT NOT NULL,
+    phone_number VARCHAR(12) NOT NULL,
+    description  TEXT        NOT NULL,
+    client_id    BIGINT      NOT NULL,
     CONSTRAINT pk_client_contacts PRIMARY KEY (id)
 );
 
@@ -80,8 +80,8 @@ CREATE TABLE orders
     adr                   TEXT,
     client_rate           numeric(19, 2),
     info                  TEXT,
-    client_full_name      TEXT   NOT NULL,
-    client_number_phone   BIGINT NOT NULL,
+    client_full_name      TEXT        NOT NULL,
+    client_number_phone   VARCHAR(12) NOT NULL,
     reward_id             BIGINT,
     CONSTRAINT pk_orders PRIMARY KEY (id)
 );
@@ -134,8 +134,8 @@ ALTER TABLE clients
 ALTER TABLE clients
     ADD CONSTRAINT FK_CLIENTS_ON_USER FOREIGN KEY (user_id) REFERENCES users (id);
 
-ALTER TABLE client_contacts
-    ADD CONSTRAINT FK_CLIENT_CONTACTS_ON_CLIENT FOREIGN KEY (client_id) REFERENCES clients (id);
+ALTER TABLE contacts
+    ADD CONSTRAINT FK_CONTACTS_ON_CLIENT FOREIGN KEY (client_id) REFERENCES clients (id);
 
 ALTER TABLE meetings
     ADD CONSTRAINT FK_MEETINGS_ON_CLIENT FOREIGN KEY (client_id) REFERENCES clients (id);

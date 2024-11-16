@@ -8,6 +8,6 @@ import org.mapstruct.MappingConstants;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         uses = {CallMapper.class, ContactMapper.class, MeetingMapper.class, ClientStatusMapper.class})
 public interface ClientMapper {
-    ResponseClient getResponseClient(Client client);
+    ResponseClient toResponseClient(Client client);
 
 }

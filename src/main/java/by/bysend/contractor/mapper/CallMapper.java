@@ -8,9 +8,9 @@ import org.mapstruct.*;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CallMapper {
-    ResponseCall getResponseCall(Call call);
+    ResponseCall toResponseCall(Call call);
 
-    Call getCall(CreateCall createCall);
+    Call toCall(CreateCall createCall);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     void update(UpdateCall updateCall, @MappingTarget Call call);

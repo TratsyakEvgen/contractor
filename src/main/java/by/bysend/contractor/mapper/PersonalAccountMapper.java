@@ -7,5 +7,5 @@ import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = {AccountMapper.class})
 public interface PersonalAccountMapper {
-    ResponsePersonalAccount getResponsePersonalAccount(PersonalAccount personalAccount);
+    ResponsePersonalAccount toResponsePersonalAccount(PersonalAccount personalAccount);
 }

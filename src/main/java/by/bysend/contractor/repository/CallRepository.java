@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CallRepository extends JpaRepository<Call, Long> {
+    List<Call> findAllByClientIdOrderByLocalDateTimeAsc(long clientId);
+
     Optional<Call> findByClientIdAndId(long clientId, long callId);
 
     void deleteByClientIdAndId(long clientId, long callId);
 
-    List<Call> findAllByClientIdOrderByLocalDateTimeAsc(long clientId);
 }

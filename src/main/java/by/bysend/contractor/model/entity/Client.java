@@ -26,6 +26,6 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
     private Set<Call> calls;
     @OneToMany(mappedBy = "client", fetch = FetchType.LAZY)
-    private Set<ClientContact> contacts;
+    private Set<Contact> contacts;
 
 }

@@ -7,5 +7,5 @@ import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ClientStatusMapper {
-    ResponseClientStatus getResponseClientStatus(ClientStatus clientStatus);
+    ResponseClientStatus toResponseClientStatus(ClientStatus clientStatus);
 }

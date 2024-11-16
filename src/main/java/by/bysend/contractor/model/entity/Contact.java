@@ -7,10 +7,10 @@ import lombok.Setter;
 import java.util.Objects;
 
 @Entity
-@Table(name = "client_contacts")
+@Table(name = "contacts")
 @Getter
 @Setter
-public class ClientContact {
+public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -23,7 +23,7 @@ public class ClientContact {
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
-        ClientContact that = (ClientContact) object;
+        Contact that = (Contact) object;
         return id == that.id;
     }
 

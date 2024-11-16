@@ -38,7 +38,7 @@ public class Order {
     private BigDecimal clientRate;
     private String info;
     private String clientFullName;
-    private long clientNumberPhone;
+    private String clientNumberPhone;
     @ManyToOne(fetch = FetchType.LAZY)
     private Reward reward;
 

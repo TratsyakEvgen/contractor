@@ -9,8 +9,8 @@ import by.bysend.contractor.mapper.CallMapper;
 import by.bysend.contractor.model.entity.Call;
 import by.bysend.contractor.model.entity.Client;
 import by.bysend.contractor.repository.CallRepository;
-import by.bysend.contractor.repository.ClientRepository;
 import by.bysend.contractor.service.CallService;
+import by.bysend.contractor.service.ClientEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,26 +25,23 @@ import java.util.List;
 public class DefaultCallService implements CallService {
     private final CallMapper callMapper;
     private final CallRepository callRepository;
-    private final ClientRepository clientRepository;
+    private final ClientEntityService clientEntityService;
 
     @Override
     public ResponseCall create(long clientId, CreateCall createCall) {
-        Client client = clientRepository.findById(clientId)
-                .orElseThrow(() -> new ServiceException(
-                        String.format("Client with id %d not found", clientId), ErrorCode.ENTITY_NOT_EXISTS)
-                );
-        Call call = callMapper.getCall(createCall);
+        Client client = clientEntityService.getClient(clientId);
+        Call call = callMapper.toCall(createCall);
         call.setClient(client);
         callRepository.save(call);
-        return callMapper.getResponseCall(call);
+        return callMapper.toResponseCall(call);
     }
 
     @Override
     public ResponseCall update(long clientId, long callId, UpdateCall updateCall) {
-        Call call = findCallByClientIdAndId(clientId, callId);
+        Call call = getCallByClientIdAndId(clientId, callId);
         callMapper.update(updateCall, call);
         callRepository.save(call);
-        return callMapper.getResponseCall(call);
+        return callMapper.toResponseCall(call);
     }
 
     @Override
@@ -56,12 +53,11 @@ public class DefaultCallService implements CallService {
     public List<ResponseCall> getAll(long clientId) {
         return callRepository.findAllByClientIdOrderByLocalDateTimeAsc(clientId)
                 .stream()
-                .map(callMapper::getResponseCall)
+                .map(callMapper::toResponseCall)
                 .toList();
     }
 
-
-    private Call findCallByClientIdAndId(long clientId, long callId) {
+    private Call getCallByClientIdAndId(long clientId, long callId) {
         return callRepository.findByClientIdAndId(clientId, callId)
                 .orElseThrow(() -> new ServiceException(
                         String.format("Call with id %d for client with id %d not found", callId, clientId),

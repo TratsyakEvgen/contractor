@@ -7,5 +7,5 @@ import org.mapstruct.MappingConstants;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface MeetingMapper {
-    ResponseMeeting getResponseMeeting(Meeting meeting);
+    ResponseMeeting toResponseMeeting(Meeting meeting);
 }

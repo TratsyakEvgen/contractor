@@ -46,7 +46,7 @@ public class DefaultPersonalAccountService implements PersonalAccountService {
                 .setMeetingsCount(meetingCount)
                 .setReward(totalReward);
 
-        return personalAccountMapper.getResponsePersonalAccount(personalAccount);
+        return personalAccountMapper.toResponsePersonalAccount(personalAccount);
     }
 
     private void checkIfUserExists(long userId) {

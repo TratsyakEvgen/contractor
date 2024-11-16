@@ -1,11 +1,17 @@
 package by.bysend.contractor.mapper;
 
+import by.bysend.contractor.dto.request.CreateContact;
+import by.bysend.contractor.dto.request.UpdateContact;
 import by.bysend.contractor.dto.response.ResponseContact;
-import by.bysend.contractor.model.entity.ClientContact;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingConstants;
+import by.bysend.contractor.model.entity.Contact;
+import org.mapstruct.*;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ContactMapper {
-    ResponseContact getResponseContact(ClientContact clientContact);
+    ResponseContact toResponseContact(Contact contact);
+
+    Contact toContact(CreateContact createContact);
+
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void update(UpdateContact updateContact, @MappingTarget Contact contact);
 }
