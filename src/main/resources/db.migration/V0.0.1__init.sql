@@ -15,21 +15,12 @@ CREATE TABLE accounts
     CONSTRAINT pk_accounts PRIMARY KEY (id)
 );
 
-CREATE TABLE auth_data
-(
-    user_id  BIGINT NOT NULL,
-    login    TEXT   NOT NULL,
-    password TEXT   NOT NULL,
-    role_id  BIGINT NOT NULL,
-    CONSTRAINT pk_auth_data PRIMARY KEY (user_id)
-);
-
 CREATE TABLE calls
 (
-    id         BIGSERIAL,
-    local_date DATE   NOT NULL,
-    result     TEXT   NOT NULL,
-    client_id  BIGINT NOT NULL,
+    id              BIGSERIAL,
+    local_date_time TIMESTAMP NOT NULL,
+    result          TEXT      NOT NULL,
+    client_id       BIGINT    NOT NULL,
     CONSTRAINT pk_calls PRIMARY KEY (id)
 );
 
@@ -70,76 +61,55 @@ CREATE TABLE meetings
 
 CREATE TABLE orders
 (
-    id                     BIGSERIAL,
-    client_id              BIGINT,
-    transportation_type_id BIGINT,
-    transport_type         VARCHAR(255),
-    loading_place          VARCHAR(255),
-    loading_date           date,
-    custom_departure       VARCHAR(255),
-    uploading_place        VARCHAR(255),
-    uploading_date         date,
-    custom_destination     VARCHAR(255),
-    code_tnvd              BIGINT,
-    name                   VARCHAR(255),
-    weight                 VARCHAR(255),
-    cost                   DECIMAL,
-    dimensions             VARCHAR(255),
-    packing                VARCHAR(255),
-    non_tariff_regulation  VARCHAR(255),
-    stacking               BOOLEAN,
-    temperature            VARCHAR(255),
-    adr                    VARCHAR(255),
-    client_rate            DECIMAL,
-    info                   VARCHAR(255),
-    client_full_name       VARCHAR(255),
-    client_number_phone    VARCHAR(255),
-    reward_id              BIGINT,
+    id                    BIGSERIAL,
+    client_id             BIGINT,
+    transport_type        TEXT,
+    loading_date          date,
+    custom_departure      TEXT,
+    uploading_date        date,
+    custom_destination    TEXT,
+    code_tnvd             BIGINT,
+    name                  TEXT,
+    weight                TEXT,
+    cost                  numeric(19, 2),
+    dimensions            TEXT,
+    packing               TEXT,
+    non_tariff_regulation TEXT,
+    stacking              BOOLEAN,
+    temperature           TEXT,
+    adr                   TEXT,
+    client_rate           numeric(19, 2),
+    info                  TEXT,
+    client_full_name      TEXT   NOT NULL,
+    client_number_phone   BIGINT NOT NULL,
+    reward_id             BIGINT,
     CONSTRAINT pk_orders PRIMARY KEY (id)
+);
+
+CREATE TABLE users
+(
+    id        BIGSERIAL,
+    full_name TEXT   NOT NULL,
+    login     TEXT   NOT NULL,
+    password  TEXT   NOT NULL,
+    role_id   BIGINT NOT NULL,
+    CONSTRAINT pk_users PRIMARY KEY (id)
 );
 
 CREATE TABLE roles
 (
     id   BIGSERIAL,
-    role VARCHAR(255),
+    role TEXT NOT NULL,
     CONSTRAINT pk_roles PRIMARY KEY (id)
-);
-
-CREATE TABLE transportation_types
-(
-    id   BIGSERIAL,
-    type VARCHAR(255),
-    CONSTRAINT pk_transportation_types PRIMARY KEY (id)
-);
-
-CREATE TABLE user_info
-(
-    user_id              BIGINT NOT NULL,
-    telegram_id          BIGINT,
-    registration_address VARCHAR(255),
-    real_address         VARCHAR(255),
-    passport_number      VARCHAR(255),
-    passport_id          VARCHAR(255),
-    insurance_id         VARCHAR(255),
-    phone_number         VARCHAR(255),
-    email                VARCHAR(255),
-    CONSTRAINT pk_userinfo PRIMARY KEY (user_id)
 );
 
 CREATE TABLE reports
 (
     id        BIGSERIAL,
     date      date,
-    path      VARCHAR(255),
-    file_name VARCHAR(255),
+    path      TEXT,
+    file_name TEXT,
     CONSTRAINT pk_reports PRIMARY KEY (id)
-);
-
-CREATE TABLE users
-(
-    id        BIGSERIAL,
-    full_name VARCHAR(255),
-    CONSTRAINT pk_users PRIMARY KEY (id)
 );
 
 CREATE TABLE rewards
@@ -154,12 +124,6 @@ ALTER TABLE accounts
 
 ALTER TABLE accounts
     ADD CONSTRAINT FK_ACCOUNTS_ON_USER FOREIGN KEY (user_id) REFERENCES users (id);
-
-ALTER TABLE auth_data
-    ADD CONSTRAINT FK_AUTHDATA_ON_ROLE FOREIGN KEY (role_id) REFERENCES roles (id);
-
-ALTER TABLE auth_data
-    ADD CONSTRAINT FK_AUTHDATA_ON_USER FOREIGN KEY (user_id) REFERENCES users (id);
 
 ALTER TABLE calls
     ADD CONSTRAINT FK_CALLS_ON_CLIENT FOREIGN KEY (client_id) REFERENCES clients (id);
@@ -179,11 +143,8 @@ ALTER TABLE meetings
 ALTER TABLE orders
     ADD CONSTRAINT FK_ORDERS_ON_CLIENT FOREIGN KEY (client_id) REFERENCES clients (id);
 
-ALTER TABLE orders
-    ADD CONSTRAINT FK_ORDERS_ON_TRANSPORTATION_TYPE FOREIGN KEY (transportation_type_id) REFERENCES transportation_types (id);
-
-ALTER TABLE user_info
-    ADD CONSTRAINT FK_USERINFO_ON_USER FOREIGN KEY (user_id) REFERENCES users (id);
+ALTER TABLE users
+    ADD CONSTRAINT FK_USERS_ON_ROLE FOREIGN KEY (role_id) REFERENCES roles (id);
 
 ALTER TABLE meetings
     ADD CONSTRAINT FK_MEETINGS_ON_REPORTS FOREIGN KEY (report_id) REFERENCES reports (id);

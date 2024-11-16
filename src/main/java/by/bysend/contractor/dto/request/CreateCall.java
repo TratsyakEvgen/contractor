@@ -4,13 +4,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @NotNull(message = "CreateCall must be not null")
 public class CreateCall {
-    @NotNull(message = "Date must be not null")
-    private LocalDate localDate;
+    @NotNull(message = "Time must be not null")
+    private LocalDateTime localDateTime;
     @NotBlank(message = "Result must be not null")
     private String result;
 }

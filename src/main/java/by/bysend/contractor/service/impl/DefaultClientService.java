@@ -30,7 +30,7 @@ public class DefaultClientService implements ClientService {
         List<Long> listId = clientPage.stream()
                 .map(Client::getId)
                 .toList();
-        Map<Long, Client> clientMap = clientRepository.findAllByIdIn(listId)
+        Map<Long, Client> clientMap = clientRepository.findAllByIdInWithMaxDateAction(listId)
                 .stream()
                 .collect(Collectors.toMap(Client::getId, Function.identity()));
         return clientPage.map(Client::getId)

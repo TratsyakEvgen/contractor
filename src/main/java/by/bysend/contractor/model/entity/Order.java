@@ -19,13 +19,9 @@ public class Order {
     private long id;
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private TransportationType transportationType;
     private String transportType;
-    private String loadingPlace;
     private LocalDate loadingDate;
     private String customDeparture;
-    private String uploadingPlace;
     private LocalDate uploadingDate;
     private String customDestination;
     @Column(name = "code_tnvd")
@@ -42,7 +38,7 @@ public class Order {
     private BigDecimal clientRate;
     private String info;
     private String clientFullName;
-    private String clientNumberPhone;
+    private long clientNumberPhone;
     @ManyToOne(fetch = FetchType.LAZY)
     private Reward reward;
 

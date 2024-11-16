@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class ClientController {
     private final ClientService clientService;
 
-    @Operation(summary = "Получить список клиентов для пользователя", tags = "clients")
+    @Operation(summary = "Получить список клиентов для пользователя", tags = "clients",
+            description = "calls, meetings - предоставляются последние по дате, но стоит учитывать что их количество" +
+                    " может быть больше 1 при условии что даты совпали")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", useReturnTypeSchema = true),
             @ApiResponse(responseCode = "404", description = "Пользователь не найден",

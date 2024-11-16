@@ -18,8 +18,12 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             "and c.user.id = :userId")
     Page<Client> findAllByUserUseFilter(long userId, Pageable pageable, ClientFilter clientFilter);
 
-    @EntityGraph(attributePaths = {"meetings", "contacts", "clientStatus", "calls"})
-    List<Client> findAllByIdIn(List<Long> listId);
+    @EntityGraph(attributePaths = {"contacts", "clientStatus"})
+    @Query("from Client client left join fetch client.calls call left join fetch client.meetings meetting " +
+            "where client.id in(:listId) " +
+            "and call.localDateTime = (select max(c.localDateTime) from Call c where c.client.id = client.id) " +
+            "and meetting.localDate = (select max(m.localDate) from Meeting m where m.client.id = client.id)")
+    List<Client> findAllByIdInWithMaxDateAction(List<Long> listId);
 
     @EntityGraph(attributePaths = {"meetings", "orders"})
     List<Client> findAllByUserId(long userId);

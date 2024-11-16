@@ -14,11 +14,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/clients/{clientId}/calls")
 public class CallController {
     private final CallService callService;
+
+    @Operation(summary = "Получить все звонки", tags = "calls",
+            description = "Предоставляет отсортированный по времени список звонков")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", useReturnTypeSchema = true),
+            @ApiResponse(responseCode = "404", description = "Клиент не найден",
+                    content = @Content(schema = @Schema(implementation = ResponseError.class)))
+    })
+    @GetMapping
+    public List<ResponseCall> getAll(@PathVariable long clientId) {
+        return callService.getAll(clientId);
+    }
 
     @Operation(summary = "Создание звонка", tags = "calls")
     @ApiResponses(value = {

@@ -17,13 +17,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String fullName;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private UserInfo userInfo;
+    private String login;
+    private String password;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Role role;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Client> clients;
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Account> accounts;
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private AuthData authData;
 
 }
