@@ -23,11 +23,7 @@ public class ContactController {
     private final ContactService contactService;
 
     @Operation(summary = "Получить все контакты", tags = "contacts")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", useReturnTypeSchema = true),
-            @ApiResponse(responseCode = "404", description = "Клиент не найден",
-                    content = @Content(schema = @Schema(implementation = ResponseError.class)))
-    })
+    @ApiResponse(responseCode = "200", useReturnTypeSchema = true)
     @GetMapping
     public List<ResponseContact> getAll(@PathVariable long clientId) {
         return contactService.getAll(clientId);

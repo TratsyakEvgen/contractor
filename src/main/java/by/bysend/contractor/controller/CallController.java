@@ -24,11 +24,7 @@ public class CallController {
 
     @Operation(summary = "Получить все звонки", tags = "calls",
             description = "Предоставляет отсортированный по времени список звонков")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", useReturnTypeSchema = true),
-            @ApiResponse(responseCode = "404", description = "Клиент не найден",
-                    content = @Content(schema = @Schema(implementation = ResponseError.class)))
-    })
+    @ApiResponse(responseCode = "200", useReturnTypeSchema = true)
     @GetMapping
     public List<ResponseCall> getAll(@PathVariable long clientId) {
         return callService.getAll(clientId);

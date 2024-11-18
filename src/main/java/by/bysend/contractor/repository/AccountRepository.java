@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    @EntityGraph(attributePaths = {"accountType"})
+    @EntityGraph(attributePaths = "accountType")
     List<Account> findAllByUserId(long userId);
 }

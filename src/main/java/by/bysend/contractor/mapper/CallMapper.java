@@ -6,7 +6,7 @@ import by.bysend.contractor.dto.response.ResponseCall;
 import by.bysend.contractor.model.entity.Call;
 import org.mapstruct.*;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface CallMapper {
     ResponseCall toResponseCall(Call call);
 

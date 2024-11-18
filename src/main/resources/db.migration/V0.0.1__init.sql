@@ -54,7 +54,7 @@ CREATE TABLE meetings
     id         BIGSERIAL,
     local_date DATE   NOT NULL,
     result     TEXT   NOT NULL,
-    report_id  BIGINT NOT NULL,
+    report_id  BIGINT,
     client_id  BIGINT NOT NULL,
     CONSTRAINT pk_meetings PRIMARY KEY (id)
 );
@@ -106,7 +106,6 @@ CREATE TABLE roles
 CREATE TABLE reports
 (
     id        BIGSERIAL,
-    date      date,
     path      TEXT,
     file_name TEXT,
     CONSTRAINT pk_reports PRIMARY KEY (id)

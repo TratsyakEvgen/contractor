@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DefaultClientEntityService implements ClientEntityService {
     private final ClientRepository clientRepository;
+
     @Override
     public Client getClient(long clientId) {
         return clientRepository.findById(clientId)

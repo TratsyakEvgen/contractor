@@ -9,9 +9,10 @@ INSERT INTO calls(local_date_time, result, client_id)
 VALUES ('2024-01-14', 'Нет ответа', 1)
      , ('2024-01-15', 'Договорились о x', 1);
 
-INSERT INTO reports(date, path, file_name)
-VALUES ('2024-01-15', 'https://some_server/path', 'Отчет.doc');
+INSERT INTO reports(path, file_name)
+VALUES ('https://some_server/path', 'Отчет.doc'),
+       ('https://some_server/path', 'Отчет.mp4');
 
 INSERT INTO meetings(local_date, result, report_id, client_id)
 VALUES ('2024-01-15', 'Не договорились', 1, 1),
-       ('2024-01-16', 'Договорились', 1, 1);
+       ('2024-01-16', 'Договорились', 2, 1);

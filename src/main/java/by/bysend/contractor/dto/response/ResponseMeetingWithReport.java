@@ -5,8 +5,9 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class ResponseMeeting {
+public class ResponseMeetingWithReport {
     private long id;
     private LocalDate localDate;
     private String result;
+    private ResponseReport report;
 }

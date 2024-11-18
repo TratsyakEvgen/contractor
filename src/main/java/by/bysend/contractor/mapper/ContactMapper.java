@@ -6,7 +6,7 @@ import by.bysend.contractor.dto.response.ResponseContact;
 import by.bysend.contractor.model.entity.Contact;
 import org.mapstruct.*;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE, componentModel = MappingConstants.ComponentModel.SPRING)
 public interface ContactMapper {
     ResponseContact toResponseContact(Contact contact);
 

@@ -9,8 +9,8 @@ services:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: contractors
-    volumes:
-      - contractor-db-data:/var/lib/postgresql/data
+    #    volumes:
+    #      - contractor-db-data:/var/lib/postgresql/data
     networks:
       - docker-network-internal
 
@@ -30,8 +30,8 @@ services:
       - docker-network
 
 
-volumes:
-  contractor-db-data:
+#volumes:
+#  contractor-db-data:
 
 networks:
   docker-network-internal:
