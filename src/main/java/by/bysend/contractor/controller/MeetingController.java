@@ -34,12 +34,12 @@ public class MeetingController {
 
     @Operation(summary = "Получение встречи", tags = "meetings")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", useReturnTypeSchema = true),
+            @ApiResponse(responseCode = "200", useReturnTypeSchema = true),
             @ApiResponse(responseCode = "404", description = "Клиент или встреча не найдены",
                     content = @Content(schema = @Schema(implementation = ResponseError.class)))
     })
     @GetMapping("{meetingId}")
-    public ResponseMeetingWithReport create(@PathVariable long clientId, @PathVariable long meetingId) {
+    public ResponseMeetingWithReport get(@PathVariable long clientId, @PathVariable long meetingId) {
         return meetingService.get(clientId, meetingId);
     }
 
@@ -74,7 +74,9 @@ public class MeetingController {
 
     @Operation(summary = "Удаление встречи", tags = "meetings")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", useReturnTypeSchema = true)
+            @ApiResponse(responseCode = "200", useReturnTypeSchema = true),
+            @ApiResponse(responseCode = "404", description = "Клиент или встреча не найдены",
+                    content = @Content(schema = @Schema(implementation = ResponseError.class)))
     })
     @DeleteMapping("/{meetingId}")
     public void delete(@PathVariable long clientId, @PathVariable long meetingId) {

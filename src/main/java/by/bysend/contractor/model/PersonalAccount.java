@@ -1,15 +1,13 @@
 package by.bysend.contractor.model;
 
 import by.bysend.contractor.model.entity.Account;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.math.BigDecimal;
 import java.util.List;
 
-@Getter
-@Setter
+@Data
 @Accessors(chain = true)
 public class PersonalAccount {
     private BigDecimal reward;

@@ -3,17 +3,16 @@ package by.bysend.contractor.model.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
+import lombok.experimental.Accessors;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "reports")
-@ToString
+@Accessors(chain = true)
 public class Report {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String path;
+    private long id;
     private String fileName;
 }

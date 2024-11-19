@@ -1,6 +1,10 @@
 spring:
   application:
     name: contractor
+  servlet:
+    multipart:
+      max-file-size: 1GB
+      max-request-size: 1GB
   jpa:
     show-sql: true
     hibernate:
@@ -18,3 +22,5 @@ springdoc:
   override-with-generic-response: false
 server:
   port: 8080
+file:
+  storage: ./reports/

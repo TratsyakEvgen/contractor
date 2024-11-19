@@ -26,10 +26,10 @@ public class AdviceController {
 
     {
         responsEntitySupplierMap.put(ErrorCode.INTERNAL_SERVER_ERROR, e -> new ResponseEntity<>(
-                new ResponseError(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Что-то пошло не так"),
+                new ResponseError(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()),
                 HttpStatus.INTERNAL_SERVER_ERROR
         ));
-        responsEntitySupplierMap.put(ErrorCode.USER_ALREADY_EXISTS, e -> new ResponseEntity<>(
+        responsEntitySupplierMap.put(ErrorCode.ENTITY_ALREADY_EXISTS, e -> new ResponseEntity<>(
                 new ResponseError(HttpStatus.BAD_REQUEST.value(), e.getMessage()),
                 HttpStatus.BAD_REQUEST
         ));
