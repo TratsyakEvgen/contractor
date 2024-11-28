@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,11 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/clients/{clientId}/meetings")
+@SecurityRequirement(name = "Bearer Authentication")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "401", description = "Unauthorized"),
+        @ApiResponse(responseCode = "403", description = "Forbidden")
+})
 public class MeetingController {
     private final MeetingService meetingService;
 

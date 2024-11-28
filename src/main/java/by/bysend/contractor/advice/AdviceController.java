@@ -4,7 +4,8 @@ package by.bysend.contractor.advice;
 import by.bysend.contractor.dto.response.ResponseError;
 import by.bysend.contractor.exception.ErrorCode;
 import by.bysend.contractor.exception.ServiceException;
-import io.jsonwebtoken.security.SignatureException;
+import by.bysend.contractor.security.exception.SecurityServiceException;
+import io.jsonwebtoken.JwtException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,14 +39,9 @@ public class AdviceController {
                 new ResponseError(HttpStatus.NOT_FOUND.value(), e.getMessage()),
                 HttpStatus.NOT_FOUND
         ));
-        responsEntitySupplierMap.put(ErrorCode.INCORRECT_PASSWORD, e -> new ResponseEntity<>(
-                new ResponseError(HttpStatus.BAD_REQUEST.value(), "Неверный пароль"),
-                HttpStatus.BAD_REQUEST
-        ));
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
-
     public ResponseEntity<ResponseError> processConstraintViolationException(ConstraintViolationException e) {
         log.info(e.getMessage());
         String messages = e.getConstraintViolations().stream()
@@ -62,13 +59,11 @@ public class AdviceController {
                 .apply(e);
     }
 
-    @ExceptionHandler(SignatureException.class)
-    public ResponseEntity<ResponseError> processSignatureException(SignatureException e) {
+    @ExceptionHandler({SecurityServiceException.class, JwtException.class})
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public void processSecurityServiceException(Exception e) {
         log.warn(e.getMessage());
-        return new ResponseEntity<>(
-                new ResponseError(HttpStatus.BAD_REQUEST.value(), "Невалидный refresh токен"),
-                HttpStatus.BAD_REQUEST
-        );
     }
+
 }
 

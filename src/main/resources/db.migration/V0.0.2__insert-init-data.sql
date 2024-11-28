@@ -6,6 +6,6 @@ INSERT INTO client_status(status)
 VALUES ('FAVORITE'),
        ('RESERVED');
 
-INSERT INTO roles(role)
+INSERT INTO roles(role_name)
 VALUES ('ADMIN'),
        ('USER');

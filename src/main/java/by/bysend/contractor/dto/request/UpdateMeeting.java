@@ -11,6 +11,6 @@ import java.time.LocalDate;
 public class UpdateMeeting {
     @NotNull(message = "Date must be not null")
     private LocalDate localDate;
-    @NotBlank(message = "Result must be not null")
+    @NotBlank(message = "Result must be not blank")
     private String result;
 }

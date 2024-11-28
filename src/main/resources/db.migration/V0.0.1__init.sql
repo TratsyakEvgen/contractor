@@ -100,8 +100,8 @@ CREATE TABLE users
 
 CREATE TABLE roles
 (
-    id   BIGSERIAL,
-    role TEXT NOT NULL,
+    id        BIGSERIAL,
+    role_name TEXT NOT NULL,
     CONSTRAINT pk_roles PRIMARY KEY (id)
 );
 
@@ -151,3 +151,5 @@ ALTER TABLE meetings
 
 ALTER TABLE orders
     ADD CONSTRAINT FK_ORDERS_ON_REWARDS FOREIGN KEY (reward_id) REFERENCES rewards (id);
+
+CREATE INDEX logins ON users (login);

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.InputStreamResource;
@@ -23,6 +24,11 @@ import java.io.IOException;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/clients/{clientId}/meetings/{meetingId}/report")
+@SecurityRequirement(name = "Bearer Authentication")
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "401", description = "Unauthorized"),
+        @ApiResponse(responseCode = "403", description = "Forbidden")
+})
 public class ReportController {
     private final ReportService reportService;
 

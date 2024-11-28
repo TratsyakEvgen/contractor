@@ -11,6 +11,6 @@ import java.time.LocalDateTime;
 public class UpdateCall {
     @NotNull(message = "Time must be not null")
     private LocalDateTime localDateTime;
-    @NotBlank(message = "Result must be not null")
+    @NotBlank(message = "Result must be not blank")
     private String result;
 }

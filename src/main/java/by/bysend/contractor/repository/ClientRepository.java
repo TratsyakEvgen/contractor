@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
@@ -27,4 +28,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     @EntityGraph(attributePaths = {"meetings", "orders"})
     List<Client> findAllByUserId(long userId);
+
+    @EntityGraph(attributePaths = "user")
+    Optional<Client> findClientById(long id);
 }

@@ -10,6 +10,6 @@ import lombok.Data;
 public class UpdateContact {
     @Pattern(regexp = "\\d{12}", message = "Incorrect number phone")
     private String phoneNumber;
-    @NotBlank(message = "Description must be not black")
+    @NotBlank(message = "Description must be not blank")
     private String description;
 }
