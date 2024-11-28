@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -72,6 +73,7 @@ public class DefaultPersonalAccountService implements PersonalAccountService {
         return orderRepository.findAllByClientIn(clients)
                 .stream()
                 .map(Order::getReward)
+                .filter(Objects::nonNull)
                 .map(Reward::getAmount)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }

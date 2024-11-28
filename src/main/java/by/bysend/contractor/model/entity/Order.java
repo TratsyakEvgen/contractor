@@ -19,19 +19,24 @@ public class Order {
     private long id;
     @ManyToOne(fetch = FetchType.LAZY)
     private Client client;
-    private String transportType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Reward reward;
+
+    private String description;
+    private String loadingPlace;
+    private String uploadingPlace;
     private LocalDate loadingDate;
     private String customDeparture;
     private LocalDate uploadingDate;
     private String customDestination;
     @Column(name = "code_tnvd")
-    private Long codeTNVD;
+    private String codeTNVD;
     private String name;
     private String weight;
     private BigDecimal cost;
     private String dimensions;
     private String packing;
-    private String NonTariffRegulation;
+    private String nonTariffRegulation;
     private Boolean stacking;
     private String temperature;
     private String ADR;
@@ -39,8 +44,7 @@ public class Order {
     private String info;
     private String clientFullName;
     private String clientNumberPhone;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Reward reward;
+
 
     @Override
     public boolean equals(Object object) {
